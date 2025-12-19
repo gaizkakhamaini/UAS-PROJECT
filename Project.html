@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Jenis Mangga</title>
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#94a3b8;
+      --accent:#ffb020
+    }
+    *{
+      box-sizing:border-box
+    }
+    body{
+      margin:auto;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
+      background:linear-gradient(180deg,#071029 0%, #072033 60%);
+      color:#e6eef6
+    }
+    .wrap{
+      max-width:1100px;
+      margin:32px auto;
+      padding:24px
+    }
+    header{
+      display:flex;
+      gap:16px;
+      align-items:center
+    }
+    header h1{
+      margin:0;
+      font-size:1.6rem
+    }
+    header p{
+      margin:0;
+      color:var(--muted)
+    }
+    .controls{
+      display:flex;
+      gap:12px;
+      margin-top:18px;
+      flex-wrap:wrap
+    }
+    .search{
+      flex:1;
+      min-width:220px
+    }
+    input,select{
+      width:100%;
+      padding:10px 12px;
+      border-radius:8px;
+      border:1px solid rgba(255,255,255,0.06);
+      background:rgba(255,255,255,0.02);
+      color:inherit
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+      gap:16px;
+      margin-top:20px
+    }
+    .card{
+      background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+      padding:14px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.03);
+      display:flex;
+      gap:12px;
+      align-items:flex-start
+    }
+    .thumb{
+      width:74px;
+      height:74px;
+      border-radius:8px;
+      overflow:hidden;
+      flex-shrink:0;
+    }
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .meta{
+      flex:1
+    }
+    .meta h3{
+      margin:0 0 6px 0;
+      font-size:1.05rem
+    }
+    .meta p{
+      margin:0;
+      color:var(--muted);
+      font-size:0.92rem
+    }
+    .tags{
+      margin-top:8px;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap
+    }
+    .tag{
+      background:rgba(255,255,255,0.03);
+      padding:6px 8px;
+      border-radius:999px;
+      font-size:0.78rem;
+      color:var(--muted)
+    }
+    footer{
+      margin-top:28px;
+      color:var(--muted);
+      font-size:0.9rem
+    }
+    @media (max-width:520px){
+      header{
+        flex-direction:column;
+        align-items:flex-start
+      }
+    }
+    .no-results{
+      padding:20px;
+      text-align:center;
+      color:var(--muted)
+    }
+    .form-card{
+      background:rgba(255,255,255,0.03);
+      padding:20px;
+      border-radius:14px;
+      margin-top:32px;
+      border:1px solid rgba(255,255,255,0.05);
+    }
+    .form-card h2{
+      margin-top:0;
+    }
+    .form-card textarea{
+      width:100%;
+      min-height:90px;
+      padding:10px;
+      border-radius:8px;
+      background:rgba(255,255,255,0.02);
+      border:1px solid rgba(255,255,255,0.08);
+      color:white;
+    }
+    .form-card button{
+      margin-top:12px;
+      padding:10px 18px;
+      border:none;
+      border-radius:999px;
+      background:var(--accent);
+      color:#3d2a00;
+      font-weight:600;
+      cursor:pointer;
+    }
+    .video-card{
+      background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
+      border-radius:16px;
+      padding:16px;
+      margin:20px 0;
+      border:1px solid rgba(255,255,255,.06);
+    }
+    .video-card h2{
+      margin:0 0 12px 0;
+      font-size:1.2rem;
+    }
+    .video-wrapper{
+      position:relative;
+      padding-top:56.25%;
+      border-radius:12px;
+      overflow:hidden;
+    }
+    .video-wrapper iframe{
+      position:absolute;
+      top:0;left:0;
+      width:100%;
+      height:100%;
+      border:0;
+    }
+  </style>
+
+</head>
+<body>
+  <div class="wrap">
+    <section class="video-card">
+      <h2>Video Potong Mangga</h2>
+      <div class="video-wrapper">
+        <iframe 
+          src="https://www.youtube.com/embed/9s1z5sY2m8k"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+    <header>
+      <div>
+        <h1>Jenis Mangga</h1>
+        <p>Panduan ringkas tentang varietas mangga populer, cita rasa, tekstur, asal, dan kegunaannya.</p>
+      </div>
+    </header>
+
+    <div class="controls">
+      <div class="search">
+        <input id="q" placeholder="Cari nama mangga, rasa, atau asal (mis. 'Alphonso' atau 'India')" aria-label="Cari mangga" />
+      </div>
+      <div style="width:160px">
+        <select id="originFilter" aria-label="Filter asal">
+          <option value="">Semua asal</option>
+        </select>
+      </div>
+      <div style="width:140px">
+        <select id="useFilter" aria-label="Filter kegunaan">
+          <option value="">Semua kegunaan</option>
+          <option value="Makan segar">Makan segar</option>
+          <option value="Olahan">Olahan (jus/pencuci mulut)</option>
+          <option value="Ekspor">Ekspor / Komersial</option>
+        </select>
+      </div>
+      <div style="width:120px">
+        <select id="seasonFilter" aria-label="Filter musim">
+          <option value="">Semua musim</option>
+          <option value="Musim panas">Musim panas</option>
+          <option value="Jika bermusim">Jika bermusim</option>
+        </select>
+      </div>
+    </div>
+
+    <main>
+      <div id="grid" class="grid"></div>
+      <div id="no" class="no-results" hidden>Tidak ada hasil yang cocok.</div>
+    </main>
+
+    <section class="form-card">
+      <h2>Form Saran</h2>
+      <p style="color:var(--muted)">Berikan saran atau jenis mangga lain yang ingin ditambahkan.</p>
+      <textarea placeholder="Tulis saran Anda di sini..."></textarea>
+      <button onclick="alert('Terima kasih atas sarannya 🙏')">Kirim Saran</button>
+    </section>    
+
+    <footer>
+      © 2025 Gaizka Khomaini Project. All rights reserved
+    </footer>
+  </div>
+
+  <script>
+    const mangga = [
+      {
+        name:'Arumanis (Harumanis)',
+        img:'https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/255/2024/12/11/Screenshot-2024-12-11-144728-4103957776.png',
+        origin:'Indonesia',
+        taste:'Manis, harum',
+        texture:'Lembut dan serat halus',
+        season:'Musim panas',
+        use:'Makan segar',
+        desc:'Populer di Indonesia, aroma wangi khas dan sangat manis. Cocok dimakan segar.'
+      },
+      {
+        name:'Golek',
+        img:'https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/255/2024/12/11/Screenshot-2024-12-11-144728-4103957776.png',
+        origin:'Indonesia',
+        taste:'Manis ringan',
+        texture:'Padat, sedikit serat',
+        season:'Musim panas',
+        use:'Makan segar',
+        desc:'Varietas lokal, buah memanjang, kulit hijau kekuningan saat matang.'
+      },
+      {
+        name:'Manalagi (Arumanis lokal)',
+        img:'https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/255/2024/12/11/Screenshot-2024-12-11-144728-4103957776.png',
+        origin:'Indonesia',
+        taste:'Manis asam',
+        texture:'Padat',
+        season:'Musim panas',
+        use:'Makan segar',
+        desc:'Sering disebut juga mangga harum manis atau manalagi, populer di pasar lokal.'
+      },
+      {
+        name:'Gedong Gincu',
+        img:'https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/255/2024/12/11/Screenshot-2024-12-11-144728-4103957776.png',
+        origin:'Indonesia',
+        taste:'Manis',
+        texture:'Lembut',
+        season:'Musim panas',
+        use:'Makan segar',
+        desc:'Varietas unggulan jawa barat, rasa manis kuat dan aroma lembut.'
+      },
+      {
+        name:'Kent',
+        img:'https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/255/2024/12/11/Screenshot-2024-12-11-144728-4103957776.png',
+        origin:'USA/Florida',
+        taste:'Manis, sedikit asam',
+        texture:'Padat, sedikit serat',
+        season:'Musim panas',
+        use:'Ekspor',
+        desc:'Sering dikirim untuk ekspor, cocok untuk disimpan dan diangkut.'
+      },
+      {
+        name:'Palmer',
+        img:'https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/255/2024/12/11/Screenshot-2024-12-11-144728-4103957776.png',
+        origin:'Brasil',
+        taste:'Manis',
+        texture:'Padat',
+        season:'Musim panas',
+        use:'Ekspor',
+        desc:'Buah besar, cocok untuk pasar ekspor.'
+      },
+      {
+        name:'Tommy Atkins',
+        img:'https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/255/2024/12/11/Screenshot-2024-12-11-144728-4103957776.png',
+        origin:'USA/Florida',
+        taste:'Kurang manis, sedikit serat',
+        texture:'Padat',
+        season:'Musim panas',
+        use:'Ekspor',
+        desc:'Varietas komersial yang tahan lama, sering dijual di supermarket.'
+      },
+      {
+        name:'Nam Dok Mai',
+        img:'https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/255/2024/12/11/Screenshot-2024-12-11-144728-4103957776.png',
+        origin:'Thailand',
+        taste:'Manis floral',
+        texture:'Lembut, sedikit serat',
+        season:'Musim panas',
+        use:'Makan segar/olahan',
+        desc:'Populer di Thailand, sering digunakan untuk mango sticky rice.'
+      },
+      {
+        name:'Chok Anan',
+        img:'https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/255/2024/12/11/Screenshot-2024-12-11-144728-4103957776.png',
+        origin:'Thailand',
+        taste:'Manis ringan',
+        texture:'Padat, renyah',
+        season:'Jika bermusim',
+        use:'Makan segar',
+        desc:'Mango mentah sering dimakan karena tekstur renyah.'
+      },
+      {
+        name:'Keitt',
+        img:'https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/255/2024/12/11/Screenshot-2024-12-11-144728-4103957776.png',
+        origin:'USA/Florida',
+        taste:'Manis asam',
+        texture:'Sedikit berserat',
+        season:'Akhir musim',
+        use:'Olahan',
+        desc:'Cocok untuk olahan dan pemrosesan karena buah besar.'
+      },
+      {
+        name:'Alphonso (India - variasi)',
+        img:'https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/255/2024/12/11/Screenshot-2024-12-11-144728-4103957776.png',
+        origin:'India',
+        taste:'Kaya rasa',
+        texture:'Lembut',
+        season:'Musim panas',
+        use:'Makan segar',
+        desc:'Varietas premium dari India, sangat aromatik.'
+      }
+    ];
+
+    const grid = document.getElementById('grid');
+    const q = document.getElementById('q');
+    const originFilter = document.getElementById('originFilter');
+    const useFilter = document.getElementById('useFilter');
+    const seasonFilter = document.getElementById('seasonFilter');
+    const no = document.getElementById('no');
+
+    const origins = Array.from(new Set(mangga.map(m=>m.origin))).sort();
+    origins.forEach(o=>{const opt=document.createElement('option');opt.value=o;opt.textContent=o;originFilter.appendChild(opt)});
+
+    function render(list){
+  grid.innerHTML='';
+  if(list.length===0){
+    no.hidden=false;
+    return;
+  } else {
+    no.hidden=true;
+  }
+
+  // helper: beri mapping nama mangga ke file halaman yang sudah dibuat
+  function getPageForName(name){
+    const n = name.toLowerCase();
+    if(n.includes('arumanis')) return 'Arumanis.html';
+    if(n.includes('golek')) return 'Golek.html';
+    if(n.includes('manalagi')) return 'Manalagi.html';
+    if(n.includes('gedong')) return 'Gedong_Gincu.html';
+    if(n.includes('kent')) return 'Kent.html';
+    if(n.includes('palmer')) return 'Palmer.html';
+    if(n.includes('tommy')) return 'Tommy_Atkins.html';
+    if(n.includes('nam')) return 'Nam_Dok_Mai.html';
+    if(n.includes('chok')) return 'Chok_Anan.html';
+    if(n.includes('keitt')) return 'Keitt.html';
+    if(n.includes('alphonso')) return 'Alphonso.html';
+    return null;
+  }
+
+  list.forEach(m=>{
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.innerHTML = `
+  <div class="thumb">
+    <img src="${m.img}" alt="${m.name}">
+  </div>
+  <div class="meta">
+    <h3>${m.name}</h3>
+    <p>${m.desc}</p>
+    <div class="tags">
+      <div class="tag">Asal: ${m.origin}</div>
+      <div class="tag">Rasa: ${m.taste}</div>
+      <div class="tag">Tekstur: ${m.texture}</div>
+    </div>
+  </div>
+`;
+
+    // jika ada halaman khusus untuk mangga ini, buat card bisa diklik
+    const page = getPageForName(m.name);
+    if(page){
+      card.style.cursor = 'pointer';
+      card.setAttribute('role','link');
+      card.tabIndex = 0; // agar bisa di-fokus
+      card.onclick = ()=>{ window.location.href = page };
+      card.addEventListener('keyup', (e)=>{ if(e.key === 'Enter') window.location.href = page });
+    }
+
+    grid.appendChild(card);
+  })
+}
+
+    function applyFilters(){
+      const s = q.value.trim().toLowerCase();
+      const origin = originFilter.value;
+      const useV = useFilter.value;
+      const season = seasonFilter.value;
+      const filtered = mangga.filter(m=>{
+        if(origin && m.origin!==origin) return false;
+        if(useV && m.use!==useV) return false;
+        if(season && m.season!==season) return false;
+        if(!s) return true;
+        return (m.name+m.desc+m.taste+m.origin+m.use).toLowerCase().includes(s);
+      });
+      render(filtered);
+    }
+    q.addEventListener('input',applyFilters);
+    originFilter.addEventListener('change',applyFilters);
+    useFilter.addEventListener('change',applyFilters);
+    seasonFilter.addEventListener('change',applyFilters);
+
+    render(mangga);
+  </script>
+</body>
+</html>
